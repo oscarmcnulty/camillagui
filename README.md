@@ -1,3 +1,5 @@
+A dockerfile created to run CamillaGUI as a container. This only contains the GUI, not the underlying camilladsp service.
+
 ## Usage
 
 ```bash
