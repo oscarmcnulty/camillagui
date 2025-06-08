@@ -12,8 +12,12 @@ RUN mkdir -p /app /data/camillagui /data/camillagui/configs /data/camillagui/coe
 
 WORKDIR /app
 
-# Download and unzip CamillaGUI backend as root (safe here)
-RUN curl -L -o camillagui.zip https://github.com/HEnquist/camillagui-backend/releases/download/v3.0.3/camillagui.zip \
+ARG UPSTREAM_VERSION
+RUN if [ -z "$UPSTREAM_VERSION" ]; then \
+      echo "ERROR: UPSTREAM_VERSION build arg is not set!"; \
+      exit 1; \
+    fi && \
+    curl -L -o camillagui.zip https://github.com/HEnquist/camillagui-backend/releases/download/${UPSTREAM_VERSION}/camillagui.zip \
     && unzip camillagui.zip -d camillagui \
     && rm camillagui.zip
 
